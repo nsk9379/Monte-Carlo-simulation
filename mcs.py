@@ -51,3 +51,27 @@ def estimate_flips_for_5_heads(num_trials=10000):
                 heads = 0
         total += count
     return total / num_trials
+
+
+# (e) Average flips before string s appears
+def estimate_flips_for_string(s="HHTTH", num_trials=5000):
+    length = len(s)
+    total = 0
+    for _ in range(num_trials):
+        flips = ""
+        count = 0
+        while True:
+            flips += random.choice(['H','T'])
+            count += 1
+            if flips.endswith(s):
+                break
+        total += count
+    return total / num_trials
+
+
+if __name__ == "__main__":
+    print("Estimated Probability of Yahtzee:", estimate_yahtzee())
+    print("Estimated Probability of Large Straight:", estimate_large_straight())
+    print("Average Longest Run (200 flips):", estimate_longest_run())
+    print("Average Flips before 5 Heads:", estimate_flips_for_5_heads())
+    print("Average Flips before HHTTH:", estimate_flips_for_string("HHTTH"))
